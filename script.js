@@ -1,4 +1,3 @@
-// ==================== Конфиг API (необязательный онлайн-режим) ====================
 const API = 'https://dummyjson.com/recipes';
 const TRANSLATE = 'https://api.mymemory.translated.net/get';
 const ONLINE_TIMEOUT = 6000;
@@ -20,7 +19,6 @@ const RU_EN = {
 const transCache = {};
 let allMealsCache = null;
 
-// ==================== Локальная база рецептов (25 рецептов) ====================
 const recipes=[
  {name:"Омлет с помидорами",emoji:"🍳",time:"15 мин",cat:"Завтрак",
   ingr:["яйца","помидоры","молоко","соль"],
@@ -96,7 +94,6 @@ const recipes=[
  {name:"Овсянка с бананом и мёдом",emoji:"🥣",time:"10 мин",cat:"Завтрак",
   ingr:["овсянка","молоко","банан","мёд"],
   steps:["Всыпьте овсянку в горячее молоко (1:2).","Варите 5 минут, помешивая.","Снимите с огня, добавьте нарезанный банан и мёд."]},
- // --- РЫБНЫЕ РЕЦЕПТЫ (7 шт) ---
  {name:"Лосось на сковороде",emoji:"🐟",time:"15 мин",cat:"Ужин",
   ingr:["лосось","лимон","масло","перец","соль"],
   steps:["Посолите и поперчите филе лосося.","Разогрейте масло на сковороде, обжарьте рыбу по 5–6 минут с каждой стороны.",
@@ -130,7 +127,6 @@ const recipes=[
    "Сбрызните лимонным соком, добавьте щепотку соли.","Аккуратно перемешайте и подавайте."]}
 ];
 
-// ==================== Чипы ингредиентов ====================
 let myIngredients=[];
 
 const chipsEl=document.getElementById('chips');
@@ -142,7 +138,7 @@ function addIngredient(){
   if(!v) return;
   if(!myIngredients.includes(v)){
     myIngredients.push(v);
-    addToHistory(v); // новое слово попадает в историю
+    addToHistory(v); 
     render();
     renderHistory();
   }
@@ -150,7 +146,6 @@ function addIngredient(){
 }
 function removeIngredient(i){myIngredients.splice(i,1);render();}
 
-// ==================== История поиска ====================
 let searchHistory=[];
 try{ searchHistory=JSON.parse(localStorage.getItem('cookingHistory')||'[]'); }
 catch(e){ searchHistory=[]; }
@@ -160,8 +155,8 @@ function saveHistory(){
 }
 
 function addToHistory(word){
-  searchHistory=searchHistory.filter(w=>w!==word); // без дубликатов
-  searchHistory.unshift(word);                     // свежие — вперёд
+  searchHistory=searchHistory.filter(w=>w!==word); 
+  searchHistory.unshift(word);                     
   if(searchHistory.length>12) searchHistory=searchHistory.slice(0,12);
   saveHistory();
 }
@@ -180,7 +175,6 @@ function addToCurrent(word){
   if(!myIngredients.includes(word)){ myIngredients.push(word); render(); }
 }
 
-// ==================== Отрисовка (локальная база — всегда) ====================
 function render(){
   chipsEl.innerHTML=myIngredients.map((x,i)=>
     `<span class="chip" onclick="removeIngredient(${i})">${x} ✕</span>`).join('');
@@ -210,7 +204,6 @@ function render(){
   searchOnline();
 }
 
-// ==================== Онлайн-режим: с таймаутом и без драм ====================
 async function fetchWithTimeout(url,ms=ONLINE_TIMEOUT){
   const ctrl=new AbortController();
   const timer=setTimeout(()=>ctrl.abort(),ms);
@@ -299,7 +292,6 @@ function renderOnlineResults(meals,failed){
     </div>`}).join('');
 }
 
-// ==================== Окна рецептов ====================
 function openRecipe(idx){
   const r=recipes[idx];
   document.getElementById('recipeModal').innerHTML=`
@@ -326,7 +318,6 @@ function openOnlineRecipe(id){
   openOverlay('recipeOverlay');
 }
 
-// ==================== Заметки ====================
 const noteArea=document.getElementById('noteArea');
 noteArea.value=localStorage.getItem('cookingNotes')||'';
 
@@ -343,14 +334,12 @@ function clearNotes(){
 }
 noteArea.addEventListener('input',()=>saveNotes(false));
 
-// ==================== Открытие/закрытие окон ====================
 function openOverlay(id){document.getElementById(id).classList.add('open');}
 function closeOverlay(id){document.getElementById(id).classList.remove('open');}
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){closeOverlay('notesOverlay');closeOverlay('recipeOverlay');}
 });
 
-// ==================== Баннер: лента блюд ====================
 const dishes=[
  {n:'Паста',e:'🍝',g:'linear-gradient(135deg,#e85d3d,#f2a541)'},
  {n:'Салат',e:'🥗',g:'linear-gradient(135deg,#43a047,#8bc34a)'},
@@ -365,14 +354,12 @@ const track=document.getElementById('track');
 track.innerHTML=[...dishes,...dishes]
   .map(d=>`<div class="dish" style="background:${d.g}"><span class="em">${d.e}</span>${d.n}</div>`).join('');
 
-// ==================== Появление баннера при скролле + старт ====================
 new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')});
 },{threshold:.15}).observe(document.getElementById('banner'));
 
-renderHistory(); // показываем сохранённую историю при загрузке страницы
+renderHistory(); 
 
-// ==================== Авторизация (демо, localStorage) ====================
 let currentUser = localStorage.getItem('cookingUser') || null;
 
 function getUsers(){
@@ -415,7 +402,7 @@ function submitAuth(){
     const pass2 = document.getElementById('authPass2').value;
     if(pass!==pass2){ msg.textContent='Пароли не совпадают'; return; }
     if(users[login]){ msg.textContent='Этот логин уже занят'; return; }
-    users[login] = pass;           // демо: в реальном продукте — хеш на сервере!
+    users[login] = pass;          
     saveUsers(users);
     currentUser = login;
     msg.classList.add('ok'); msg.textContent='Аккаунт создан!';
@@ -447,7 +434,6 @@ function logout(){
   renderAuthButton();
 }
 
-// Enter в полях — как нажатие кнопки
 ['authLogin','authPass','authPass2'].forEach(id=>{
   document.getElementById(id).addEventListener('keydown',e=>{
     if(e.key==='Enter') submitAuth();
