@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Что приготовить из этого? — подборка рецептов</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#e85d3d">
+</head>
+<body>
+
+<section class="hero">
+  <h1>Что приготовить <span>из этого?</span></h1>
+  <p>Введите продукты, которые есть в холодильнике, — подберём рецепты</p>
+  <div class="searchbox">
+    <input id="ing" placeholder="например: яйца, помидоры…" autocomplete="off">
+    <button onclick="addIngredient()">Добавить</button>
+  </div>
+  <div class="chips" id="chips"></div>
+  <div class="history-box" id="historyBox">
+    <h4>История поиска:</h4>
+    <div id="history-tags"></div>
+  </div>
+  <div class="results" id="results"></div>
+</section>
+
+<section class="banner reveal" id="banner">
+  <h2>Популярные блюда этой недели</h2>
+  <p class="sub">Наведите курсор, чтобы остановить ленту</p>
+  <div class="marquee">
+    <div class="track" id="track"></div>
+  </div>
+</section>
+
+<button class="notes-btn" title="Мои заметки" onclick="openNotes()">📝</button>
+
+<div class="overlay" id="notesOverlay" onclick="if(event.target===this)closeOverlay('notesOverlay')">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('notesOverlay')">✕</button>
+    <h3>Мои заметки</h3>
+    <textarea id="noteArea" placeholder="Что купить, что приготовить, идеи на ужин…"></textarea>
+    <div class="note-actions">
+      <span class="note-status" id="noteStatus">Сохранено ✓</span>
+      <button class="btn btn-ghost" onclick="clearNotes()">Очистить</button>
+      <button class="btn btn-primary" onclick="saveNotes(true)">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="recipeOverlay" onclick="if(event.target===this)closeOverlay('recipeOverlay')">
+  <div class="modal" id="recipeModal"></div>
+</div>
+
+<div class="overlay" id="authOverlay" onclick="if(event.target===this)closeOverlay('authOverlay')">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('authOverlay')">✕</button>
+    <h3 id="authTitle">Вход</h3>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Вход</button>
+      <button class="auth-tab" id="tabReg" onclick="switchAuthTab('reg')">Регистрация</button>
+    </div>
+    <div class="auth-field"><label>Логин</label>
+      <input id="authLogin" placeholder="придумайте логин" autocomplete="off"></div>
+    <div class="auth-field"><label>Пароль</label>
+      <input id="authPass" type="password" placeholder="минимум 4 символа"></div>
+    <div class="auth-field" id="pass2Field" style="display:none"><label>Повторите пароль</label>
+      <input id="authPass2" type="password" placeholder="ещё раз"></div>
+    <p class="auth-msg" id="authMsg"></p>
+    <button class="btn btn-primary auth-submit" id="authSubmit" onclick="submitAuth()">Войти</button>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+    
+<header class="topbar">
+  <button class="auth-btn" id="authBtn" onclick="openAuth()">Войти</button>
+</header>
+
+</html>
