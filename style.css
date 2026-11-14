@@ -5,7 +5,6 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
 
-/* ===== Герой ===== */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
   text-align:center;padding:40px 20px 20px;position:relative;
   background:radial-gradient(1200px 600px at 20% 0%,#ffe8d6 0%,transparent 60%),
@@ -27,7 +26,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
   cursor:pointer;animation:pop .25s ease}
 @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
 
-/* ===== История поиска ===== */
 .history-box{margin-top:16px;max-width:560px;width:100%;display:none}
 .history-box h4{font-size:.95rem;color:var(--muted);margin-bottom:8px;font-weight:600}
 #history-tags{display:flex;flex-wrap:wrap;gap:6px}
@@ -49,7 +47,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 .ingr{font-size:.9rem;margin-top:8px}
 .have{color:#2e7d32}.miss{color:#c62828}
 
-/* ===== Интернет-рецепты ===== */
 .recipe-img{width:100%;height:150px;object-fit:cover;border-radius:12px;margin-bottom:12px}
 .badge-online{display:inline-block;background:#e8f5e9;color:#2e7d32;font-size:.7rem;
   font-weight:700;padding:3px 10px;border-radius:999px;vertical-align:middle}
@@ -59,7 +56,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 @keyframes spin{to{transform:rotate(360deg)}}
 .offline-note{grid-column:1/-1;text-align:center;color:var(--muted);font-size:.95rem}
 
-/* ===== Баннер блюд ===== */
 .banner{padding:60px 0 30px;background:linear-gradient(180deg,transparent,#fff3e6 30%,#ffe0c7)}
 .banner h2{text-align:center;font-size:1.8rem;margin-bottom:8px}
 .banner .sub{text-align:center;color:var(--muted);margin-bottom:30px}
@@ -79,13 +75,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
 footer{text-align:center;color:var(--muted);padding:40px 0 60px;font-size:.9rem}
 
-/* ===== Кнопка заметок ===== */
 .notes-btn{position:fixed;bottom:26px;right:26px;width:58px;height:58px;border-radius:50%;
   border:0;background:var(--accent);color:#fff;font-size:1.6rem;cursor:pointer;z-index:60;
   box-shadow:0 10px 26px rgba(232,93,61,.35);transition:transform .2s}
 .notes-btn:hover{transform:scale(1.1) rotate(-8deg)}
 
-/* ===== Общее для окон ===== */
 .overlay{position:fixed;inset:0;background:rgba(45,42,38,.45);display:none;z-index:70;
   align-items:center;justify-content:center;backdrop-filter:blur(3px)}
 .overlay.open{display:flex;animation:fade .25s ease}
@@ -100,7 +94,6 @@ footer{text-align:center;color:var(--muted);padding:40px 0 60px;font-size:.9rem}
 .close-x:hover{background:#ffe3d6;color:#b03a1e}
 .modal-img{width:100%;max-height:220px;object-fit:cover;border-radius:12px;margin-bottom:16px}
 
-/* ===== Окно заметок ===== */
 #noteArea{width:100%;min-height:200px;border:2px solid #f4ede4;border-radius:12px;
   padding:14px;font:inherit;font-size:1rem;resize:vertical;outline:0;background:#fffaf3}
 #noteArea:focus{border-color:var(--accent2)}
@@ -111,7 +104,6 @@ footer{text-align:center;color:var(--muted);padding:40px 0 60px;font-size:.9rem}
 .btn-primary:hover{filter:brightness(1.08)}
 .btn-ghost{background:#f4ede4;color:var(--ink)}
 
-/* ===== Окно рецепта ===== */
 .steps{counter-reset:step;list-style:none}
 .steps li{counter-increment:step;display:flex;gap:14px;padding:12px 0;
   border-bottom:1px dashed #f0e4d5;font-size:.98rem;line-height:1.5}
@@ -121,7 +113,6 @@ footer{text-align:center;color:var(--muted);padding:40px 0 60px;font-size:.9rem}
   display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
 .modal .ingr-line{background:#fffaf3;border-radius:12px;padding:12px 16px;font-size:.95rem;margin-bottom:16px}
 
-/* ===== Верхняя панель и авторизация ===== */
 .topbar{position:fixed;top:16px;right:20px;z-index:50}
 .auth-btn{border:0;background:#fff;color:var(--accent);font:inherit;font-weight:700;
   padding:10px 20px;border-radius:999px;cursor:pointer;
